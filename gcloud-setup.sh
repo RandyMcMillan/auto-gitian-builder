@@ -4,11 +4,11 @@
 me="$(whoami)"
 su me
 sudo ln -s /home/$me /home/gitianuser
-
+cd /home/gitianuser
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
 #install for usage in this script
-sudo apt-get install rename
+sudo apt-get install rename lynx
 #begin setup
 sudo apt-get install git ruby apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld
 echo "TYPE 'exit' then press RETURN"
@@ -60,7 +60,7 @@ cd gitian-builder
 bin/make-base-vm --lxc --arch amd64 --suite bionic # For releases >= 0.17.0
 bin/make-base-vm --lxc --arch amd64 --suite trusty # For releases <  0.17.0
 cd /home/gitianuser
-cp bitcoin/contrib/gitian-build.py .
+cp /home/gitianuser/bitcoin/contrib/gitian-build.py .
 
 
 read -p 'Rebuild base? Y/n ' REBUILD
