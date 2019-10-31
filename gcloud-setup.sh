@@ -38,19 +38,33 @@ cd vm-builder-0.12.4+bzr494
 sudo python setup.py install
 cd ..
 
+
+
+read -p 'ENTER your Github.com username: ' GITHUB_USER_NAME
+#read -sp 'Password: ' GITHUB_USER_PASSWORD
+echo
+echo Thankyou $GITHUB_USER_NAME we now have your login details
+git clone https://github.com/bitcoin-core/gitian.sigs.git
+cd gitian.sigs
+git remote add $GITHUB_USER_NAME  https://github.com/$GITHUB_USER_NAME/gitian.sigs.git
+cd ..
+
 git clone https://github.com/devrandom/gitian-builder.git
 git clone https://github.com/bitcoin/bitcoin
 git clone https://github.com/bitcoin-core/gitian.sigs.git
 git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git
 
 cd gitian-builder
-bin/make-base-vm --lxc --arch amd64 --suite bionic # For releases after and including 0.17.0
-#bin/make-base-vm --lxc --arch amd64 --suite trusty # For releases before 0.17.0
+bin/make-base-vm --lxc --arch amd64 --suite bionic # For releases >= 0.17.0
+bin/make-base-vm --lxc --arch amd64 --suite trusty # For releases <  0.17.0
 cd /home/gitianuser
 cp bitcoin/contrib/gitian-build.py .
-./gitian-build.py --setup
 
-read -p 'ENTER Github.com username: ' uservar
-#read -sp 'Password: ' passvar
-echo
-echo Thankyou $uservar we now have your login details
+
+read -p 'Rebuild base? Y/n ' REBUILD
+if [ $REBUILD == 'Y' ];then
+	rm -rf /home/gitianuser/gitian-builder/base-*
+fi
+
+./gitian-build.py --setup
+rm -f /home/gitianuser/vm-builder*.gz.*
