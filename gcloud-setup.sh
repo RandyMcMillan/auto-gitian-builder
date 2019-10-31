@@ -7,6 +7,8 @@ sudo ln -s /home/$me /home/gitianuser
 
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
+#install for usage in this script
+sudo apt-get install rename
 #begin setup
 sudo apt-get install git ruby apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld
 echo "TYPE 'exit' then press RETURN"
@@ -64,7 +66,15 @@ cp bitcoin/contrib/gitian-build.py .
 read -p 'Rebuild base? Y/n ' REBUILD
 if [ $REBUILD == 'Y' ];then
 	rm -rf /home/gitianuser/gitian-builder/base-*
+	rm -drf /home/gitianuser/gitian-builder/inputs
 fi
 
 ./gitian-build.py --setup
 rm -f /home/gitianuser/vm-builder*.gz.*
+
+mkdir /home/gitianuser/gitian-builder/inputs
+wget  https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.11.sdk.tar.xz
+rename -v -f 's/.xz/.gz' MAcOSX10.11.sdk.tar.xz
+#wget -O /home/gitianuser/gitian-builder/inputs https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.12.sdk.tar.xz
+#wget -O /home/gitianuser/gitian-builder/inputs https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.13.sdk.tar.xz
+#mv /home/gitianuser/gitian-builder/inputs/MacOSX10.13.sdk.tar.xz /home/gitianuser/gitian-builder/inputs/
