@@ -78,7 +78,7 @@ cd /home/gitianuser/gitian-builder/inputs
 	wget  https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.11.sdk.tar.xz
 	mv MacOSX10.11.sdk.tar.xz MacOSX10.11.sdk.tar.gz
 
-cp /home/gitianuser/bitcoin/contrib/gitian-build.py .
+cp /home/gitianuser/bitcoin/contrib/gitian-build.py /home/gitianuser/.
 cd /home/gitianuser
 
 	./gitian-build.py --setup
