@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
-#make default gitianuser work
-me="$(whoami)"
-su me
-sudo ln -s /home/$me /home/gitianuser
-
 cd /home/gitianuser
 
 	#begin setup
@@ -89,5 +84,5 @@ cd /home/gitianuser
 	./gitian-build.py --setup
 	read -p 'ENTER version (example: 0.18.0.rc): ' VERSION
 
-/home/gitianuser/./gitian-build.py --detach-sign --no-commit -b $GITHUB_USER_NAME $VERSION
+./home/gitianuser/gitian-build.py --detach-sign --no-commit -b $GITHUB_USER_NAME $VERSION
 
