@@ -2,6 +2,10 @@
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
 apt-get update
+apt-get install sudo
+apt-get install lsb-release
+adduser gitianuser
+cd /home/gitianuser
 
 cd /home/gitianuser
 
@@ -46,14 +50,16 @@ cd /home/gitianuser
 	echo
 	echo Thankyou $GITHUB_USER_NAME
 	read -p 'ENTER your Github.com user email: ' GITHUB_USER_EMAIL
-	#read -sp 'Password: ' GITHUB_USER_PASSWORD
 	echo
 	echo Thankyou $GITHUB_USER_NAME for your email.
+	read -p 'ENTER your public gpg signing key id: ' PUBLIC_GPG_SIGNING_KEY_ID
+	echo
+	echo Thankyou $GITHUB_USER_NAME for public gpg signing key id.
 
 	echo "configuring git"
 	git config --global user.name GITHUB_USER_NAME
 	git config --global user.email GITHUB_USER_EMAIL
-
+	
 	git clone https://github.com/bitcoin-core/gitian.sigs.git
 
 cd /home/gitianuser/gitian.sigs
