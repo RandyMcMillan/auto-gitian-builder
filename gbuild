@@ -2,15 +2,13 @@
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
 apt-get update
-apt-get install sudo
-apt-get install lsb-release
+apt-get install sudo git vim python3 ruby apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld bionic lsb-release docker 
 adduser gitianuser
-cd /home/gitianuser
 
 cd /home/gitianuser
 
 	#begin setup
-	sudo apt-get install sudo git vim python3 ruby apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld bionic lsb-release docker 
+	apt-get install sudo git vim python3 ruby apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld bionic lsb-release docker 
 	echo "TYPE 'exit' then press RETURN"
 	echo "TYPE 'exit' then press RETURN"
 	echo "TYPE 'exit' then press RETURN"
@@ -41,7 +39,7 @@ cd /home/gitianuser
 
 cd vm-builder-0.12.4+bzr494
 
-	sudo python setup.py install
+	sudo python3 setup.py install
 
 cd /home/gitianuser
 
