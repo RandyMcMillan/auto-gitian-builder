@@ -5,7 +5,27 @@ apt-get update
 apt-get install wget
 apt-get install python3
 apt-get install debootstrap
-apt-get install git vim ruby apt-cacher-ng qemu-utils lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl firewalld bionic lsb-release docker 
+apt-get install lsb-release
+apt-get install git
+apt-get install vim
+apt-get install ruby
+apt-get install apt-cacher-ng
+apt-get install qemu-utils
+apt-get install lxc
+apt-get install python-cheetah
+apt-get install parted
+apt-get install kpartx
+apt-get install bridge-utils
+apt-get install make
+apt-get install ubuntu-archive-keyring
+apt-get install curl
+apt-get install firewalld
+apt-get install bionic
+apt-get install lsb-release
+apt-get install docker 
+
+
+
 adduser gitianuser
 
 cd /home/gitianuser
