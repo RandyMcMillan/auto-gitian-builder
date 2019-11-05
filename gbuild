@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
-apt-get update
+apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
+apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy install
+apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy upgrade
+
+apt-get install sudo
 apt-get install wget
 apt-get install python3
 apt-get install debootstrap
@@ -23,25 +27,22 @@ apt-get install firewalld
 apt-get install bionic
 apt-get install lsb-release
 apt-get install docker 
-
-
+apt-get install cgroup
 
 adduser gitianuser
+sudo adduser gitianuser sudo
+
 
 cd /home/gitianuser
+#ln -s /gbuild /home/gitianuser
 wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/gitian-build.py
 chmod +x gitian-build.py
 
 ./gitian-build.py
 
-
-
-
-exit
-
 	#begin setup
 	echo "TYPE 'exit' then press RETURN"
-	#sudo -s
+	sudo -s
 	# the version of lxc-start in Debian needs to run as root, so make sure
 	# that the build script can execute it without providing a password
 	echo "%sudo ALL=NOPASSWD: /usr/bin/lxc-start" > /etc/sudoers.d/gitian-lxc
