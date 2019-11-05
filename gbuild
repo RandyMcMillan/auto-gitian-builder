@@ -27,10 +27,10 @@ apt-get install firewalld
 apt-get install bionic
 apt-get install lsb-release
 apt-get install docker 
-apt-get install cgroup
+apt-get install cgroup-tools
 
 adduser gitianuser
-sudo adduser gitianuser sudo
+adduser gitianuser sudo
 
 
 cd /home/gitianuser
@@ -38,11 +38,11 @@ cd /home/gitianuser
 wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/gitian-build.py
 chmod +x gitian-build.py
 
-./gitian-build.py
+#./gitian-build.py
 
 	#begin setup
 	echo "TYPE 'exit' then press RETURN"
-	sudo -s
+	#sudo -s
 	# the version of lxc-start in Debian needs to run as root, so make sure
 	# that the build script can execute it without providing a password
 	echo "%sudo ALL=NOPASSWD: /usr/bin/lxc-start" > /etc/sudoers.d/gitian-lxc
@@ -69,8 +69,8 @@ chmod +x gitian-build.py
 
 cd /home/gitianuser
 cd vm-builder-0.12.4+bzr494
-
-	python3 setup.py install
+    runuser -l gitianuser -c 'python3 setup.py install'
+	#python3 setup.py install
 
 cd /home/gitianuser
 
