@@ -39,6 +39,16 @@ apt-get install libfakeroot
 apt-get install debian-keyring
 apt-get install libdb4.8 libdb4.8++
 apt-get install pacman
+apt-get install pciutils
+apt-get install subversion
+apt-get install language-pack-en
+apt-get install wget
+apt-get install linux-image-generic
+apt-get install grub-pc
+apt-get install openssh-server
+apt-get install wget
+
+
 pacman -S git base-devel boost libevent python
 
 sudo adduser gitianuser
