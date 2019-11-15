@@ -158,11 +158,16 @@ cd /home/gitianuser
 echo $PWD
 sudo chmod +x gitian-build.py
 
-	read -p 'ENTER version (example: 0.19.0rc3): ' VERSION
+	read -p 'ENTER version (example: 0.18.0): ' VERSION
 	ifconfig
 	#REF: https://github.com/devrandom/gitian-builder/issues/175#issuecomment-404679323
-	export LXC_BRIDGE=lxcbr0
-	sudo ifconfig lxcbr0 up 10.0.2.2
-	sudo ./gitian-build.py --build --url=https://github.com/randymcmillan/bitcoin.git  $GITHUB_USER_NAME $VERSION
+export LXC_BRIDGE=lxcbr0
+sudo ifconfig lxcbr0 up 10.0.2.2
+	echo $GITHUB_USER_NAME
+	echo GITHUB_USER_NAME
+	echo $VERSION
+	echo VERSION
+	#sudo ./gitian-build.py --build --url=https://github.com/$GITHUB_USER_NAME/bitcoin.git $GITHUB_USER_NAME $VERSION
+	sudo ./gitian-build.py --build --url=https://github.com/$GITHUB_USER_NAME/bitcoin.git $GITHUB_USER_NAME $VERSION
 
 echo $PWD
