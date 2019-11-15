@@ -37,10 +37,12 @@ apt-get install libalgorithm-diff-perl
 apt-get install libalgorithm-diff-xs-perl
 apt-get install libfakeroot
 apt-get install debian-keyring
+apt-get install libdb4.8 libdb4.8++
+apt-get install pacman
+pacman -S git base-devel boost libevent python
 
-
-adduser gitianuser
-adduser gitianuser sudo
+sudo adduser gitianuser
+sudo adduser gitianuser sudo
 
 
 cd /home/gitianuser
