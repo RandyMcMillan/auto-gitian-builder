@@ -163,6 +163,6 @@ sudo chmod +x gitian-build.py
 	#REF: https://github.com/devrandom/gitian-builder/issues/175#issuecomment-404679323
 	export LXC_BRIDGE=lxcbr0
 	sudo ifconfig lxcbr0 up 10.0.2.2
-	sudo ./gitian-build.py -o l -o w -o m --buildsign --url https://github.com/randymcmillan/bitcoin.git  $GITHUB_USER_NAME $VERSION
+	sudo ./gitian-build.py --build --url=https://github.com/randymcmillan/bitcoin.git  $GITHUB_USER_NAME $VERSION
 
 echo $PWD
