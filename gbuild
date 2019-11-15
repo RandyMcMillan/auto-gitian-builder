@@ -2,8 +2,8 @@
 #REF: https://raw.githubusercontent.com/bitcoin-core/docs/master/gitian-building/gitian-building-setup-gitian-debian.md
 
 apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
-apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy install
-apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy upgrade
+#apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy install
+#apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy upgrade
 
 apt-get install sudo
 apt-get install wget
@@ -54,13 +54,10 @@ pacman -S git base-devel boost libevent python
 sudo adduser gitianuser
 sudo adduser gitianuser sudo
 
-
+echo $PWD
 cd /home/gitianuser
-#ln -s /gbuild /home/gitianuser
-wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/gitian-build.py
-chmod +x gitian-build.py
+echo $PWD
 
-#./gitian-build.py
 
 	#begin setup
 	echo "TYPE 'exit' then press RETURN"
@@ -90,11 +87,13 @@ chmod +x gitian-build.py
 	tar -zxvf vm-builder_0.12.4+bzr494.orig.tar.gz
 
 cd /home/gitianuser
+echo $PWD
 cd vm-builder-0.12.4+bzr494
     runuser -l gitianuser -c 'python3 setup.py install'
 	#python3 setup.py install
 
 cd /home/gitianuser
+echo $PWD
 
 	read -p 'ENTER your Github.com username: ' GITHUB_USER_NAME
 	#read -sp 'Password: ' GITHUB_USER_PASSWORD
@@ -114,21 +113,25 @@ cd /home/gitianuser
 	git clone https://github.com/bitcoin-core/gitian.sigs.git
 
 cd /home/gitianuser/gitian.sigs
+echo $PWD
 
 	git remote add $GITHUB_USER_NAME  https://github.com/$GITHUB_USER_NAME/gitian.sigs.git
 
 cd /home/gitianuser
+echo $PWD
 
 	git clone https://github.com/devrandom/gitian-builder.git
 	git clone https://github.com/bitcoin/bitcoin
 	git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git
 
 cd /home/gitianuser/gitian-builder
+echo $PWD
 
 	bin/make-base-vm --lxc --arch amd64 --suite bionic # For releases >= 0.17.0
 	bin/make-base-vm --lxc --arch amd64 --suite trusty # For releases <  0.17.0
 
 cd /home/gitianuser
+echo $PWD
 
 	read -p 'Rebuild base? Y/n ' REBUILD
 	if [ $REBUILD == 'Y' ];then
@@ -142,16 +145,20 @@ cd /home/gitianuser
 
 mkdir /home/gitianuser/gitian-builder/inputs
 cd /home/gitianuser/gitian-builder/inputs
+echo $PWD
 
 	wget  https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.11.sdk.tar.xz
 	mv MacOSX10.11.sdk.tar.xz MacOSX10.11.sdk.tar.gz
 
 cp /home/gitianuser/bitcoin/contrib/gitian-build.py /home/gitianuser/.
 cd /home/gitianuser
+echo $PWD
 
 	./gitian-build.py --setup
 	read -p 'ENTER version (example: 0.19.0rc3): ' VERSION
 
 cd /home/gitianuser
+echo $PWD
+chmod +x gitian-build.py
 ./gitian-build.py -o l -o m -o w --setup -d -D --detach-sign --no-commit -b $GITHUB_USER_NAME $VERSION
 
