@@ -20,6 +20,7 @@ apt-get install python-cheetah
 apt-get install parted
 apt-get install kpartx
 apt-get install bridge-utils
+apt-get install autoconf
 apt-get install make
 apt-get install ubuntu-archive-keyring
 apt-get install curl
@@ -158,6 +159,10 @@ echo $PWD
 sudo chmod +x gitian-build.py
 
 	read -p 'ENTER version (example: 0.19.0rc3): ' VERSION
+	ifconfig
+	#REF: https://github.com/devrandom/gitian-builder/issues/175#issuecomment-404679323
+	export LXC_BRIDGE=lxcbr0
+	sudo ifconfig lxcbr0 up 10.0.2.2
 	sudo ./gitian-build.py -o l -o w -o m --buildsign --url https://github.com/randymcmillan/bitcoin.git  $GITHUB_USER_NAME $VERSION
 
 echo $PWD
