@@ -28,6 +28,7 @@ apt-get install bionic
 apt-get install lsb-release
 apt-get install docker 
 apt-get install cgroup-tools
+apt-get install libtool
 
 adduser gitianuser
 adduser gitianuser sudo
