@@ -158,6 +158,6 @@ echo $PWD
 sudo chmod +x gitian-build.py
 
 	read -p 'ENTER version (example: 0.19.0rc3): ' VERSION
-	sudo ./gitian-build.py -o l -o w -o m --build --detach-sign --no-commit -b signer $GITHUB_USER_NAME version  $VERSION
+	sudo ./gitian-build.py -o l -o w -o m --buildsign --url https://github.com/randymcmillan/bitcoin  $GITHUB_USER_NAME $VERSION
 
 echo $PWD
