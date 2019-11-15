@@ -89,7 +89,9 @@ echo $PWD
 cd /home/gitianuser
 echo $PWD
 cd vm-builder-0.12.4+bzr494
-    runuser -l gitianuser -c 'python3 setup.py install'
+#    runuser -l gitianuser -c 'sudo python3 setup.py install'
+	gitianuser ALL = NOPASSWORD: /home/gitianuser/vm-builder-0.12.4+bzr494/setup.py install
+#	./gitian-build.py --setup
 	#python3 setup.py install
 
 cd /home/gitianuser
@@ -153,12 +155,9 @@ echo $PWD
 cp /home/gitianuser/bitcoin/contrib/gitian-build.py /home/gitianuser/.
 cd /home/gitianuser
 echo $PWD
+sudo chmod +x gitian-build.py
 
-	./gitian-build.py --setup
 	read -p 'ENTER version (example: 0.19.0rc3): ' VERSION
+	sudo ./gitian-build.py -o l -o m -o w --setup -d -D --detach-sign --no-commit -b $GITHUB_USER_NAME $VERSION
 
-cd /home/gitianuser
 echo $PWD
-chmod +x gitian-build.py
-./gitian-build.py -o l -o m -o w --setup -d -D --detach-sign --no-commit -b $GITHUB_USER_NAME $VERSION
-
